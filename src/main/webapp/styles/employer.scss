@@ -24,7 +24,8 @@ $employer-post2: #ff8a80;
 }
 
 .new-post,
-.change-post {
+.change-post,
+.delete-post {
   background: white;
   border-radius: 4px;
   box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2),
@@ -102,10 +103,43 @@ div.home-employer {
   padding-bottom: 10px;
 }
 
-.approve-button:hover > md-icon {
+.approve-button:hover > md-icon,
+.checkmark1 > md-icon {
   color: green;
 }
 
-.delete-button:hover > md-icon {
+.delete-button:hover > md-icon,
+.cross2 > md-icon {
   color: red;
+}
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+
+  .star {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+
+    &.filled {
+      color: #fd0;
+    }
+  }
+
+  &.readonly .star.filled {
+    color: #666;
+  }
+}
+
+.btn-pay,
+.btn-pay:hover {
+  color: #fff !important;
+  background-color: #419641;
+  border-color: #5cb85c;
 }

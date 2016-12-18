@@ -1,0 +1,1 @@
+angular.module('jobzz').constant('CURRENCIES', ['RON', 'EUR', 'USD']);

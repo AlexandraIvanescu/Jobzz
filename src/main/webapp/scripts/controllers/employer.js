@@ -3,25 +3,66 @@ angular.module('jobzz')
         $scope.currentNavItem = 'home';
 
         $scope.newPost = function () {
-            var position = $mdPanel.newPanelPosition()
-                .absolute()
-                .center();
 
-            var config = {
-                attachTo: angular.element(document.body),
-                controller: 'NewPostEmployerCtrl',
-                controllerAs: 'NewPostEmployerCtrl',
-                templateUrl: '/views/employer/newPost.html',
-                hasBackdrop: true,
-                panelClass: 'new-post',
-                position: position,
-                clickOutsideToClose: true,
-                escapeToClose: true
+            var req = {
+                method: 'GET',
+                dataType: 'json',
+                url: '/employer/allow/new/post',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
             };
 
-            $mdPanel.open(config).then(function (result) {
-                $rootScope.panelRef = result;
+            $http(req).then(function (response) {
+
+                var position = $mdPanel.newPanelPosition()
+                    .absolute()
+                    .center();
+
+                var config = {};
+
+                if (response.data.isAllow) {
+
+                    config = {
+                        attachTo: angular.element(document.body),
+                        controller: 'NewPostEmployerCtrl',
+                        controllerAs: 'NewPostEmployerCtrl',
+                        templateUrl: '/views/employer/newPost.html',
+                        hasBackdrop: true,
+                        panelClass: 'new-post',
+                        position: position,
+                        clickOutsideToClose: true,
+                        escapeToClose: true,
+                        disableParentScroll: true,
+                        trapFocus: true
+                    };
+
+                } else {
+
+                    config = {
+                        attachTo: angular.element(document.body),
+                        controller: 'WarningNewPostEmployerCtrl',
+                        controllerAs: 'WarningNewPostEmployerCtrl',
+                        templateUrl: '/views/employer/warningNewPost.html',
+                        hasBackdrop: true,
+                        panelClass: 'new-post',
+                        position: position,
+                        clickOutsideToClose: true,
+                        escapeToClose: true,
+                        disableParentScroll: true,
+                        trapFocus: true
+                    };
+
+                }
+
+                $mdPanel.open(config).then(function (result) {
+                    $rootScope.panelRef = result;
+                });
+
+            }, function () {
+                console.log('Fail !');
             });
+
         };
 
 

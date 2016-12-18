@@ -1,0 +1,45 @@
+<div ng-controller="JobDetailsEmployeeCtrl" flex ng-cloak class="job-details">
+
+    <div class="row">
+        <div class="col-md-4 post-details">
+            <md-card md-theme-watch class="post-details-card">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><b>{{job.employer.firstName + ' ' + job.employer.lastName}}</b></span>
+                        <br/>
+                        <span class="md-subhead"><b>Email : </b> <br/>{{job.employer.email}}</span>
+                        <br/>
+                        <span class="md-subhead"><b>Phone Number : </b> <br/> {{job.employer.phoneNumber}}</span>
+                        <br/>
+                        <span class="md-subhead"><b>Reputation : </b> {{job.employer.reputation}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg">
+                            <img src="/image/user.png">
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-card>
+        </div>
+        <div class="col-md-4 post-details">
+            <md-card md-theme-watch class="post-details-card">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><b>{{job.name}}</b></span>
+                        <span class="md-subhead"><b>Description : </b>{{job.description}}</span>
+                        <span class="md-subhead"><b>From </b> {{job.startDate}} <b>to</b> {{job.endDate}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-primary btn-apply-job" ng-click="apply()">Apply</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <div class="col-md-4">
+            <ng-map center="{{latlng}}" zoom="14" class="map-margin">
+                <marker position="{{latlng}}"></marker>
+            </ng-map>
+        </div>
+    </div>
+
+</div>

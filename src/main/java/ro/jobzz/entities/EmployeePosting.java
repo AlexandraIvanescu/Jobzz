@@ -1,7 +1,9 @@
 package ro.jobzz.entities;
 
 import javax.persistence.*;
-import java.sql.Date;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class EmployeePosting {
@@ -19,7 +21,7 @@ public class EmployeePosting {
     private EmployerPosting employerPosting;
 
     @Column(nullable = false)
-    private Integer price;
+    private Float price;
 
     @Column(nullable = false, length = 3)
     private String currency;
@@ -59,11 +61,11 @@ public class EmployeePosting {
         this.employerPosting = employerPosting;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

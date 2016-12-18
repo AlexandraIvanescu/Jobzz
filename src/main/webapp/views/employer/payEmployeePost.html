@@ -1,0 +1,33 @@
+<div ng-controller="PayEmployeePostEmployerCtrl" flex ng-cloak>
+    <div role="dialog" layout="column" layout-align="center center">
+        <md-toolbar>
+            <div class="md-toolbar-tools change-post-toolbar">
+                <h3>Make Payment</h3>
+            </div>
+        </md-toolbar>
+
+        <div class="change-post-container">
+            <form role="form" name="reviewForm" ng-submit="payEmployee()">
+                <h4>Make a payment to {{employeePost.employee.firstName + ' ' + employeePost.employee.lastName}}</h4>
+                <div star-rating ng-model="review.point" max="10"></div>
+
+                <div layout="row">
+                    <md-input-container class="md-block change-post-label">
+                        <label for="description">Comment</label>
+                        <input id="description" name="comment" ng-model="review.comment" maxlength="300">
+                    </md-input-container>
+                </div>
+
+                <div layout="row" class="dialog-button">
+                    <md-button flex class="md-primary" ng-click="closeDialog()" flex-gt-sm>
+                        Close
+                    </md-button>
+                    <md-button type="submit" flex class="md-primary" flex-gt-sm>
+                        Pay
+                    </md-button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

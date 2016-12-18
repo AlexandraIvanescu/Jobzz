@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-4">
             <ng-map center="{{latlng}}" zoom="14" class="map-margin">
-                <marker position="{{latlng}}" animation="Animation.BOUNCE" animation="DROP"></marker>
+                <marker position="{{latlng}}"></marker>
             </ng-map>
         </div>
     </div>
@@ -43,19 +43,29 @@
                         <h4><b>Date : </b> {{employeePost.date}}</h4>
                         <p><b>Comment : </b> {{employeePost.comment}}</p>
                     </div>
-                    <div ng-if="post.status == 0">
-                        <md-button class="md-icon-button md-secondary approve-button" aria-label="Approve">
-                            <md-icon md-svg-icon="image/checkmark.svg"></md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button md-secondary delete-button" aria-label="Delete">
-                            <md-icon md-svg-icon="image/cross.svg"></md-icon>
-                        </md-button>
-                    </div>
+                    <md-button class="md-icon-button md-secondary approve-button" ng-click="approved(employeePost)"
+                               ng-class=" 'checkmark' + employeePost.status " aria-label="Approve"
+                               ng-if="post.status == 0">
+                        <md-icon md-svg-icon="image/checkmark.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button md-secondary delete-button" ng-click="refused(employeePost)"
+                               ng-class=" 'cross' + employeePost.status " aria-label="Delete" ng-if="post.status == 0">
+                        <md-icon md-svg-icon="image/cross.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button md-secondary delete-button"
+                               ng-click="removeEmployeePost(employeePost)"
+                               ng-class=" 'cross' + employeePost.status " aria-label="Delete" ng-if="post.status == 1">
+                        <md-icon md-svg-icon="image/cross.svg"></md-icon>
+                    </md-button>
+                    <md-button flex class="md-secondary md-primary btn-success btn-pay"
+                               ng-click="payEmployee(employeePost)"
+                               ng-if="post.status == 2">
+                        Pay
+                    </md-button>
                     <md-divider></md-divider>
                 </md-list-item>
             </md-list>
         </md-content>
 
     </div>
-
 </div>

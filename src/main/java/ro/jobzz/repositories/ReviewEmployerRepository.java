@@ -6,4 +6,8 @@ import ro.jobzz.entities.ReviewEmployer;
 
 @Repository
 public interface ReviewEmployerRepository extends JpaRepository<ReviewEmployer, Integer> {
+
+    @SuppressWarnings("unchecked")
+    ReviewEmployer saveAndFlush(ReviewEmployer review);
+
 }

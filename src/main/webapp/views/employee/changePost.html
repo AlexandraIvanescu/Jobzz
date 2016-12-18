@@ -1,0 +1,59 @@
+<div ng-controller="ChangePostEmployeeCtrl">
+
+    <div role="dialog" layout="column" layout-align="center center">
+        <md-toolbar>
+            <div class="md-toolbar-tools apply-job-toolbar">
+                <h3>Change Post</h3>
+            </div>
+        </md-toolbar>
+
+        <div class="change-post-container">
+            <form role="form" name="postForm" ng-submit="changePost()">
+
+                <div layout="row">
+                    <md-input-container class="md-block change-post-label" flex-gt-sm="70">
+                        <label for="price">Price</label>
+                        <input id="price" required name="price" ng-model="post.price" minlength="1" maxlength="10"
+                               ng-pattern="/^\d{1,8}(\.\d{1,2})?$/">
+                        <div ng-messages="postForm.price.$error" role="alert">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength','pattern']">
+                                This field must be a valid price !
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="30">
+                        <label>Currency</label>
+                        <md-select name="currency" ng-model="post.currency" required>
+                            <md-option ng-repeat=" currency in currencies" value="{{currency}}">
+                                {{currency}}
+                            </md-option>
+                        </md-select>
+                        <div class="validation-messages" ng-messages="postForm.currency.$error">
+                            <div ng-message-exp="['required']">
+                                Please select a currency.
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container class="md-block change-post-label">
+                        <label for="comment">Comment</label>
+                        <input id="comment" name="comment" ng-model="post.comment">
+                    </md-input-container>
+                </div>
+
+                <div layout="row" class="dialog-button">
+                    <md-button flex class="md-primary" ng-click="closeDialog()" flex-gt-sm>
+                        Close
+                    </md-button>
+                    <md-button type="submit" flex class="md-primary" flex-gt-sm>
+                        Change
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

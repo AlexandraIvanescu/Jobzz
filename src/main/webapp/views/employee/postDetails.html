@@ -1,0 +1,75 @@
+<div ng-controller="PostDetailsEmployeeCtrl" flex ng-cloak class="job-details">
+
+    <div class="row">
+        <div class="col-md-4 post-details">
+            <md-card md-theme-watch class="post-details-card">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><b>{{job.employerPosting.employer.firstName + ' ' + job.employer.lastName}}</b></span>
+                        <br/>
+                        <span class="md-subhead"><b>Email : </b> <br/>{{job.employerPosting.employer.email}}</span>
+                        <br/>
+                        <span class="md-subhead"><b>Phone Number : </b> <br/> {{job.employerPosting.employer.phoneNumber}}</span>
+                        <br/>
+                        <span class="md-subhead"><b>Reputation : </b> {{job.employerPosting.employer.reputation}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg">
+                            <img src="/image/user.png">
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-primary btn-apply-job" ng-click="reviewEmployer()"
+                               ng-if="job.status == 4 || job.status == 5 || job.status == 6">
+                        Review
+                    </md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <div class="col-md-4 post-details">
+            <md-card md-theme-watch class="post-details-card">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><b>{{job.employerPosting.name}}</b></span>
+                        <span class="md-subhead"><b>Description : </b>{{job.employerPosting.description}}</span>
+                        <span class="md-subhead"><b>From </b> {{job.employerPosting.startDate}} <b>to</b> {{job.employerPosting.endDate}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+        </div>
+        <div class="col-md-4">
+            <ng-map center="{{latlng}}" zoom="14" class="map-margin">
+                <marker position="{{latlng}}"></marker>
+            </ng-map>
+        </div>
+    </div>
+
+    <div flex-gt-sm flex class="applications">
+        <md-toolbar layout="row">
+            <div class="md-toolbar-tools apply-job-toolbar">
+                <span>My Application</span>
+            </div>
+        </md-toolbar>
+
+        <md-content>
+            <md-list flex>
+                <md-list-item class="md-3-line">
+                    <md-icon md-svg-icon="image/user.svg" class="md-avatar"></md-icon>
+                    <div class="md-list-item-text md-list-item-padding">
+                        <h4><b>Price : </b>{{ job.price + ' ' + job.currency }}</h4>
+                        <h4><b>Date : </b> {{job.date}}</h4>
+                        <p><b>Comment : </b> {{job.comment}}</p>
+                    </div>
+                    <md-button flex class="md-secondary md-primary btn-success btn-pay"
+                               ng-click="changePostEmployer(job)"
+                               ng-if="job.status == 0 || job.status == 2">
+                        Change
+                    </md-button>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+
+    </div>
+</div>

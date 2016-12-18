@@ -3,7 +3,7 @@
         <h3>Waiting</h3>
         <div class="row">
             <div ng-repeat="job in jobsWaiting" class="col-md-6">
-                <md-card md-theme-watch ng-class="'job' + job.status">
+                <md-card md-theme-watch ng-class="'job' + job.status" ng-click="postDetails(job)">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline"><b>{{job.employerPosting.name}}</b></span>
@@ -20,7 +20,7 @@
         <h3>In Progress</h3>
         <div class="row">
             <div ng-repeat="job in jobsProgress" class="col-md-6">
-                <md-card md-theme-watch ng-class="'job' + job.status">
+                <md-card md-theme-watch ng-class="'job' + job.status" ng-click="postDetails(job)">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline"><b>{{job.employerPosting.name}}</b></span>
@@ -37,7 +37,7 @@
         <h3>Done</h3>
         <div class="row">
             <div ng-repeat="job in jobsDone" class="col-md-6">
-                <md-card md-theme-watch ng-class="'job' + job.status">
+                <md-card md-theme-watch ng-class="'job' + job.status" ng-click="postDetails(job)">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline"><b>{{job.employerPosting.name}}</b></span>

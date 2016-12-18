@@ -41,7 +41,7 @@
 
     <div class="row">
         <div ng-repeat="job in jobs" class="col-md-3">
-            <md-card md-theme-watch ng-class="'post' + job.status">
+            <md-card md-theme-watch ng-class="'post' + job.status" ng-click="jobDetails(job)">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline"><b>{{job.name}}</b></span>

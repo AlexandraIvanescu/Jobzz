@@ -23,12 +23,14 @@ public class EmployeeController {
     private EmployeeService employeeService;
     private EmployeePostingService postingService;
     private EmployerPostingService employerPostingService;
+    private EmployeePostingService employeePostingService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, EmployeePostingService postingService, EmployerPostingService employerPostingService) {
+    public EmployeeController(EmployeeService employeeService, EmployeePostingService postingService, EmployerPostingService employerPostingService, EmployeePostingService employeePostingService) {
         this.employeeService = employeeService;
         this.postingService = postingService;
         this.employerPostingService = employerPostingService;
+        this.employeePostingService = employeePostingService;
     }
 
 
@@ -60,7 +62,6 @@ public class EmployeeController {
 
 
     @RequestMapping(value = "/all/post", method = RequestMethod.GET)
-    @ResponseBody
     public Map<String, Object> getAllEmployeePost() {
         List<EmployeePosting> postings = postingService.getAllEmployeePost();
         List<EmployeePosting> jobsWaiting = new ArrayList<>();
@@ -79,22 +80,18 @@ public class EmployeeController {
 
         });
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("jobsWaiting", jobsWaiting);
-        response.put("jobsProgress", jobsProgress);
-        response.put("jobsDone", jobsDone);
+        Map<String, Object> model = new HashMap<>();
+        model.put("jobsWaiting", jobsWaiting);
+        model.put("jobsProgress", jobsProgress);
+        model.put("jobsDone", jobsDone);
 
-        return response;
+        return model;
     }
 
     @RequestMapping(value = "/all/available/jobs", method = RequestMethod.GET)
     @ResponseBody
     public List<EmployerPosting> getAllAvailableJobs() {
-        List<EmployerPosting> posts = employerPostingService.findAllAvailablePostsForEmployee();
-
-        posts.forEach(posting -> posting.setEmployer(null));
-
-        return posts;
+        return employerPostingService.findAllAvailablePostsForEmployee();
     }
 
     @RequestMapping(value = "/find/available/jobs", method = RequestMethod.POST)
@@ -104,11 +101,27 @@ public class EmployeeController {
             job.setName("");
         }
 
-        List<EmployerPosting> posts = employerPostingService.findAllAvailablePostsForEmployee(job.getName(), job.getStartDate(), job.getEndDate());
+        return employerPostingService.findAllAvailablePostsForEmployee(job.getName(), job.getStartDate(), job.getEndDate());
+    }
 
-        posts.forEach(posting -> posting.setEmployer(null));
+    @RequestMapping(value = "/create/post", method = RequestMethod.POST)
+    public Map<String, Object> createEmployeePost(@RequestBody EmployeePosting post) {
+        boolean isCreated = employeePostingService.createPost(post);
 
-        return posts;
+        Map<String, Object> model = new HashMap<>();
+        model.put("isCreated", isCreated);
+
+        return model;
+    }
+
+    @RequestMapping(value = "/update/post", method = RequestMethod.PUT)
+    public Map<String, Object> updateEmployeePost(@RequestBody EmployeePosting post) {
+        boolean isUpdate = employeePostingService.createPost(post);
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("isUpdate", isUpdate);
+
+        return model;
     }
 
 }

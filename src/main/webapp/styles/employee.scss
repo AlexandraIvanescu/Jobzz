@@ -17,7 +17,8 @@ $employee-red: #ff8a80;
   background-color: $employee-color;
 }
 
-.nav-bar-employee > .md-nav-bar {
+.nav-bar-employee > .md-nav-bar,
+.apply-job-toolbar {
   background-color: $employee-color !important;
 }
 
@@ -71,4 +72,17 @@ div.findJob {
 
 .max-width {
   width: 100%;
+}
+
+div.job-details {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+.btn-apply-job {
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
 }
